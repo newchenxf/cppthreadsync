@@ -15,7 +15,8 @@ IHEADER = -I$(HEADER_PATH)
 TARGET = mockService
 
 #源文件
-DEPEND = src/main.cpp src/MainController.cpp src/base/ThreadTaskQueue.cpp src/base/WatchDog.cpp src/base/logutils.cpp
+DEPEND = src/*.cpp src/base/*.cpp
+#DEPEND = src/main.cpp src/MainController.cpp src/base/ThreadTaskQueue.cpp src/base/WatchDog.cpp src/base/logutils.cpp
 
 all: $(TARGET)
 
