@@ -8,12 +8,14 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <iostream>
-//#include "plog/Log.h"
+#include "plog/Log.h"
 
-//#define LOG_TAG "iqiyi"
 
-#define ALOGI(...) printf(__VA_ARGS__)
-#define ALOGW(...) printf(__VA_ARGS__)
-#define ALOGE(...) printf(__VA_ARGS__)
+#define ALOGI(...) PLOGI.printf(__VA_ARGS__)
+#define ALOGW(...) PLOGW.printf(__VA_ARGS__)
+#define ALOGE(...) PLOGE.printf(__VA_ARGS__)
+
+void intializeLog(std::string mode="t", std::string logDirName="/home/chenxiaofeng", std::string logFileName="tdsync_test.txt");
+
 
 #endif

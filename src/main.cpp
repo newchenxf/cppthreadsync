@@ -9,7 +9,7 @@
 using namespace cpptdsync;
 
 int main(int argc, char* argv[]) {
-    //intializeLog("f", "/data/qiyi/gsLog", "gameService_log.txt");
+    intializeLog("f", "/home/chenxiaofeng", "my_test.txt");
 
     //创建一个智能指针，指向ThreadTaskQueue
     std::shared_ptr<ThreadTaskQueue> worker_queue(new ThreadTaskQueue());
