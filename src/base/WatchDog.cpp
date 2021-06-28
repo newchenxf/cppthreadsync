@@ -1,4 +1,3 @@
-
 #include "WatchDog.h"
 #include <assert.h>
 #include "logutils.h"
