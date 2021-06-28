@@ -1,7 +1,3 @@
-//
-// Created by Yujunlei on 2020/03/16.
-//
-
 #include "ThreadTaskQueue.h"
 #include <assert.h>
 

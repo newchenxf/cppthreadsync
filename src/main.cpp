@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <thread>
 #include "base/ThreadTaskQueue.h"

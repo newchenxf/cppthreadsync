@@ -1,4 +1,3 @@
-
 #ifndef THREAD_TASK_QUEUE_H
 #define THREAD_TASK_QUEUE_H
 
