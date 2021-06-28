@@ -17,8 +17,10 @@ int main(int argc, char* argv[]) {
     //启动一个线程，执行方法是ThreadTaskQueue::Run，给Run的参数是ThreadTaskQueue指针
     std::thread worker_thread(&ThreadTaskQueue::Run, worker_queue.get());
 
+    //使用任务的业务对象
     std::shared_ptr<MainController> gc(new MainController(worker_queue));
 
+    //看门狗，如果有某个任务执行超过30s，则报警，走到下面的回调
     std::unique_ptr<SoftWatchDog> dog(new SoftWatchDog(worker_queue));
     dog->SetCallback([=]() {
         const char *last_name = worker_queue->GetLastTaskName().c_str();

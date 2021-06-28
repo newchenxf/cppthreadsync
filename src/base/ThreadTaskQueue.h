@@ -12,6 +12,9 @@
 
 namespace cpptdsync {
 
+/**
+ * 任务的接口
+ * */
 class QueuedTask {
 public:
     virtual ~QueuedTask() = default;
@@ -24,34 +27,44 @@ private:
     std::string taskName_;
 };
 
+/**
+ * QueuedTask的实现类
+ * 
+ * @name 任务名称
+ * @closure 具体执行工作，是一个Lambda表达式(函数)
+ * */
 template <typename Closure>
 class ClosureTask : public QueuedTask {
 public:
     explicit ClosureTask(std::string &&name, Closure &&closure)
         : QueuedTask(std::forward<std::string>(name)), 
         closure_(std::forward<Closure>(closure)), 
-        finished_(false) {}
+        finished_(false) {
+            ALOGI("create task. 0x%x ", this);
+        }
+
     void WaitTask() override {
         std::unique_lock<std::mutex> lk(mutex_);
-        // ALOGI("WaitTask. 0x%x", this);
+         ALOGI("WaitTask. 0x%x", this);
         if (finished_) {
-            // ALOGI("Task. 0x%x OK", this);
+            ALOGI("Task. 0x%x OK", this);
             return;
         }
         cv_.wait(lk);
-        // ALOGI("Task. 0x%x OK", this);
+        ALOGI("Task. 0x%x OK", this);
     }
-    // ~ClosureTask() {
-        // ALOGI("Delete task. 0x%x ", this);
-    // }
+
+     ~ClosureTask() {
+        ALOGI("Delete task. 0x%x ", this);
+     }
 private:
     bool DoTask() override {
         std::unique_lock<std::mutex> lk(mutex_);
-        // ALOGI("DoTask. 0x%x", this);
+        ALOGI("DoTask. 0x%x", this);
         closure_();
         finished_ = true;
         cv_.notify_one();
-        // ALOGI("Task. 0x%x finish", this);
+        ALOGI("Task. 0x%x finish", this);
         return true;
     }
 
@@ -61,6 +74,10 @@ private:
     bool finished_;
 };
 
+
+/**
+ * 任务队列的管理
+ * */
 class ThreadTaskQueue {
 public:
     ThreadTaskQueue():thread_ref_(0) {}

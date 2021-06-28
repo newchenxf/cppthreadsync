@@ -15,6 +15,10 @@
 #define ALOGW(...) PLOGW.printf(__VA_ARGS__)
 #define ALOGE(...) PLOGE.printf(__VA_ARGS__)
 
+/**
+ * 日志可以记录到本地文件
+ * 使用这个开源库：https://github.com/SergiusTheBest/plog
+ * */
 void intializeLog(std::string mode="t", std::string logDirName="/home/chenxiaofeng", std::string logFileName="tdsync_test.txt");
 
 
