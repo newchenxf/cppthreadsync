@@ -16,6 +16,7 @@ public:
     void RegisterCallback(Callback* cb) {callback_ = cb;}
 
 private:
+    void sendCallback(std::string message);
     Callback* callback_;
 };
 

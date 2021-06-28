@@ -21,9 +21,13 @@ void MainController::Setup() {
 }
 
 void MainController::SendMsg(string& message) {
+    ALOGI("PostTask SendMsg");
+
     //异步调用
     workerQueue_->PostTask("SendMsg", [=]() {
         ALOGI("SendMsg %s", message.c_str());
+        sleep(2);
+        ALOGI("SendMsg done");
     });
 }
 

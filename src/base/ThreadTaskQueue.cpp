@@ -7,6 +7,12 @@
 
 namespace cpptdsync {
 
+/**
+ * 提交一个任务
+ * 
+ * @task 任务
+ * @wait 为true表示等到任务结束，该函数才执行完，为false表示提交完任务，无需等待任务执行，结束该调用
+ * */
 void ThreadTaskQueue::Post(std::unique_ptr<QueuedTask> task, bool wait)
 {
     assert(thread_ref_ != 0);
@@ -29,6 +35,9 @@ void ThreadTaskQueue::Post(std::unique_ptr<QueuedTask> task, bool wait)
     }
 }
 
+/**
+ * static函数，线程启动执行的入口
+ * */
 void ThreadTaskQueue::Run(void* obj) {
     ThreadTaskQueue* impl = static_cast<ThreadTaskQueue*>(obj);
     if (impl->thread_ref_ != 0) 
